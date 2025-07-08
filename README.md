@@ -34,7 +34,7 @@ A aplicação realiza operações de **CRUD** com proteção via [Keycloak](http
 
 ### 1. Criar o arquivo `docker-compose.yml`
 
-```yaml
+```bash
 version: "3.8"
 
 services:
@@ -54,7 +54,10 @@ services:
 ### 2. Configurar o KeyCloack
 
 No terminal execute:
-`docker-compose up -d`
+
+```bash
+docker-compose up -d
+```
 
 Acesse: http://localhost:8080
 
@@ -64,10 +67,9 @@ Acesse: http://localhost:8080
 
 No application.yml:
 
-```
+```bash
 spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8080/realms/n3-seguranca
 spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8080/realms/n3-seguranca/protocol/openid-connect/certs
-
 ```
 
 ---
@@ -76,13 +78,17 @@ spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8080/real
 
 1. **Clone o Repositório:**
 
-```
+```bash
   git clone https://github.com/DiegoPlaninscheck/n3_seguranca_backend.git
   cd n3_seguranca_backend
-
 ```
 
-2.**Compile e execute**:
-`mvn spring-boot:run`
+---
+
+2.**Compile e execute:**
+
+```bash
+mvn spring-boot:run
+```
 
 A aplicação estará disponivel em: http://locahost:8081
