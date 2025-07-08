@@ -55,3 +55,9 @@ git clone https://github.com/DiegoPlaninscheck/n3_seguranca_backend.git
 cd n3_seguranca_backend
 
 ```
+
+# 2. Configure o KeyCloak
+
+Edite o arquivo application.properties ou application.yml com os dados do seu servidor Keycloak:
+spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8080/realms/n3-seguranca
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8080/realms/n3-seguranca/protocol/openid-connect/certs
