@@ -1,63 +1,88 @@
 # 🔐 N3 Segurança - Backend
 
-Este é o **backend da aplicação N3 Segurança**, desenvolvido com **Java 17**, **Spring Boot** e **Keycloak** para gerenciamento de autenticação e autorização via OAuth2/OpenID Connect.
+Este é o **backend da aplicação N3 Segurança**, desenvolvido com **Java 17**, **Spring Boot** e **Keycloak**, responsável por fornecer uma API REST segura com autenticação e autorização baseadas em roles.
+
+---
 
 ## 📌 Visão Geral
 
-Esta API RESTful permite operações de **CRUD** com segurança reforçada por meio de autenticação via [Keycloak]. As permissões de acesso são controladas por **roles** definidas no Keycloak, integradas ao Spring Security.
+A aplicação realiza operações de **CRUD** com proteção via [Keycloak](https://www.keycloak.org/), utilizando autenticação OAuth2 e validação de permissões com base em roles definidas no Keycloak.
 
 ---
 
 ## ⚙️ Tecnologias Utilizadas
 
-- [Java 17]
-- [Spring Boot]
-  - Spring Web
-  - Spring Security
-- [Keycloak]
-- [Maven]
-- [JPA/Hibernate]
-- [H2 Database (para testes locais)]
-- [Lombok]
+- [Java 17](https://www.oracle.com/br/java/technologies/javase/jdk17-archive-downloads.html)
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Security](https://spring.io/projects/spring-security)
+- [Keycloak](https://www.keycloak.org/)
+- [Maven](https://maven.apache.org/)
+- [JPA / Hibernate](https://hibernate.org/)
+- [H2 Database (ambiente local)](https://www.h2database.com/)
+- [Lombok](https://projectlombok.org/)
 
 ---
 
-## 🔐 Segurança com Keycloak
-
-A segurança da aplicação é baseada em:
-
-- **Autenticação**: feita via Keycloak usando o protocolo OAuth2.
-- **Autorização**: controlada por roles definidas no Realm do Keycloak.
-- Os endpoints da API são protegidos por anotações do Spring Security, como `@PreAuthorize`.
-
----
-
-## 🔧 Configuração do Ambiente
+## 🔐 Configuração do Keycloak com Docker
 
 ### ✅ Pré-requisitos
 
-- [Java 17]
-- [Maven]
-- Um servidor Keycloak em execução com:
-  - Realm configurado (ex: `n3-seguranca`)
-  - Client configurado (ex: `n3-backend`)
-  - Roles criadas (ex: `admin`, `diego`, `gabriel`)
-  - Usuários com suas respectivas roles
+- [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) instalados
+- Porta `8080` disponível
 
 ---
 
-## 🚀 Executando o Projeto
+### 1. Criar o arquivo `docker-compose.yml`
 
-1. **Clone o repositório**
+```yaml
+version: "3.8"
 
-```bash
-git clone https://github.com/DiegoPlaninscheck/n3_seguranca_backend.git
-cd n3_seguranca_backend
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: start-dev
+```
+
+---
+
+### 2. Configurar o KeyCloack
+
+No terminal execute:
+`docker-compose up -d`
+
+Acesse: http://localhost:8080
+
+---
+
+### 3. Configurando o Spring Boot
+
+No application.yml:
+
+```
+spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8080/realms/n3-seguranca
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8080/realms/n3-seguranca/protocol/openid-connect/certs
 
 ```
 
-2.  **Configure o KeyCloak**
+---
 
-Edite o arquivo application.properties ou application.yml com os dados do seu servidor Keycloak:
-spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8080/realms/n3-seguranca
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:8080/realms/n3-seguranca/protocol/openid-connect/certs
+### Executando a Aplicação
+
+1. **Clone o Repositório:**
+
+```
+  git clone https://github.com/DiegoPlaninscheck/n3_seguranca_backend.git
+  cd n3_seguranca_backend
+
+```
+
+2.**Compile e execute**:
+`mvn spring-boot:run`
+
+A aplicação estará disponivel em: http://locahost:8081
