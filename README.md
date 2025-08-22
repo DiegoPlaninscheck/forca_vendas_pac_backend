@@ -1,4 +1,4 @@
-# 🔐 N3 Segurança - Backend
+# 🔐 Força de Vendas ROSA URBANA - Backend
 
 Este é o **backend da aplicação N3 Segurança**, desenvolvido com **Java 17**, **Spring Boot** e **Keycloak**, responsável por fornecer uma API REST segura com autenticação e autorização baseadas em roles.
 
