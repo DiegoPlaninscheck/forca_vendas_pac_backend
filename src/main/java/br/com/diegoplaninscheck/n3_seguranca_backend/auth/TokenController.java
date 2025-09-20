@@ -18,6 +18,7 @@ public class TokenController {
 
     @PostMapping
     public ResponseEntity<String> token(@RequestBody User user) {
+
         HttpHeaders headers = new HttpHeaders();
         RestTemplate rt = new RestTemplate();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -33,6 +34,7 @@ public class TokenController {
 
         var result = rt.postForEntity("http://localhost:8080/realms/master/protocol/openid-connect/token", entity,
                 String.class);
+        System.out.println("Resposta Keycloak: " + result.getBody());
         return result;
 
     }
