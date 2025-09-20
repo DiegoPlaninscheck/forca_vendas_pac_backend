@@ -1,5 +1,9 @@
 package br.com.diegoplaninscheck.n3_seguranca_backend.Repository;
 
-public class OrderItemRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.diegoplaninscheck.n3_seguranca_backend.model.OrderItem;
+
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
+
 }
