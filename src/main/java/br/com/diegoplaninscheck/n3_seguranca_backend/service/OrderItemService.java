@@ -3,9 +3,12 @@ package br.com.diegoplaninscheck.n3_seguranca_backend.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import br.com.diegoplaninscheck.n3_seguranca_backend.Repository.OrderItemRepository;
 import br.com.diegoplaninscheck.n3_seguranca_backend.model.OrderItem;
 
+@Service
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
 
