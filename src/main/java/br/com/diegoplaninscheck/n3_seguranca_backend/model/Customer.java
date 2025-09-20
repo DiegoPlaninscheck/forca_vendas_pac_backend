@@ -13,11 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String cnpj, razaoSocial, name;
+    private String cnpj;
+
+    private String razaoSocial;
+    
+    private String name;
 
 }

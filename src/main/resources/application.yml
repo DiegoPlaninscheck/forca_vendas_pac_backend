@@ -10,7 +10,8 @@ spring:
         driverClassName: "org.h2.Driver"
         username: "sa"
         password: ""
-        url: "jdbc:h2:file:./Users/diegoplaninscheck/n3_db"
+        # url: "jdbc:h2:file:./Users/diegoplaninscheck/n3_db"
+        url: jdbc:h2:file:C:/Users/diego/Documents/pac_db
         # jdbc:h2:file:C:/Users/diego/Documentos
         # /Users/diegoplaninscheck
 
